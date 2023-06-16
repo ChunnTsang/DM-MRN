@@ -6,7 +6,7 @@ More specifically, it is detailed as follow.
      train.py ······A script executing model training.
      test.py  ······A script executing model tests.
      tools.py ······A script implementing the data preprocessing, result saving and etc.
-     net.pyd  ······A script implementing the DM-MRN model.
+     net.py  ······A script implementing the DM-MRN model.
      /Datasets:  ······Including the PU, SA, HHK, Berlin and HU2018 data sets.
           /PaviaU
                PaviaU.mat
