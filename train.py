@@ -119,7 +119,7 @@ def main():
     for run in range(N_RUNS):
         train_run(run)
     #record time
-    ACCU_DIR = RESULT_DIR + 'Accu_file/' + DATASET + '/' + str(SAMPLE_SIZE) + '_' + str(ITER_NUM) + '/'
+    ACCU_DIR = RESULT_DIR + 'Accu_File/' + DATASET + '/' + str(SAMPLE_SIZE) + '_' + str(ITER_NUM) + '/'
     if not os.path.isdir(ACCU_DIR):
         os.makedirs(ACCU_DIR)
     time_path = ACCU_DIR+str(DATASET)+'_'+str(SAMPLE_SIZE)+'.txt'
