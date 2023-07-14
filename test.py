@@ -84,7 +84,20 @@ def test_run(run):
             result = module_1(tr_data,te_data,task_index,special_list,N_TEST)
             result = torch.split(result, 1, dim=1)
             for i in range(len(result)):
-                relation_i = result[i].view(-1, SAMPLE_SIZE)
+                relation_i = result[i]
+                c = 0
+                for j in range(N_CLASSES):
+                    if j + 1 in task_index:
+                        y_front = relation_i[:j * SAMPLE_SIZE + special_list[c], :]
+                        y_back = relation_i[j * SAMPLE_SIZE + special_list[c]:, :]
+                        remain = SAMPLE_SIZE - special_list[c]
+                        y = torch.zeros((remain, 1)).cuda(0)
+                        relation_i = [y_front, y, y_back]
+                        relation_i = torch.cat(relation_i, dim=0)
+                        c = c + 1
+                    else:
+                        pass
+                relation_i = relation_i.view(-1, SAMPLE_SIZE)
                 scores, _ = torch.max(relation_i, dim=1)
                 _, output = torch.max(scores, dim=0)
                 pre_labels.append(output.tolist())
