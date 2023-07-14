@@ -277,7 +277,9 @@ class imagetoclass2(nn.Module):
         self.feature_dim = feature_dim
         self.sample_size = SAMPLE_SIZE
 
-    def cal_L(self, S, Q, task_index,special_list, mode, k):
+    def cal_L(self, S, Q, t_index, s_list, mode, k):
+        task_index = t_index.copy()
+        special_list = s_list.copy()
         count = 0
         S_add_T_norm = []
         for i in range(self.n_class):
@@ -287,10 +289,12 @@ class imagetoclass2(nn.Module):
                     for j in range(special_list[0]//2):
                         Si.append(S[count])
                         count = count + 1
+                    del special_list[0]
                 elif mode == 'test':
                     for j in range(special_list[0]):
                         Si.append(S[count])
                         count = count + 1
+                    del special_list[0]
             else:
                 if mode == 'train':
                     for j in range(self.batch_size_per_class):
